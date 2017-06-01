@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div>
+    <a href="/">Back to Blog</a>
+</div>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
+                :style="{width: myHealth + '%'}">
+                    <span v-if="inGame">{{ myHealth }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
+                :style="{width: monsterHealth + '%'}">
+                    <span v-if="inGame">{{ monsterHealth }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if="!inGame">
+        <div class="small-12 columns">
+            <button id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+    </section>
+    <template v-else>
+    <section class="row controls">
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">ATTACK</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
+            <button id="give-up" @click="giveUp">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="attack in attacks" :class="attack.attacker+'-turn'">
+                    {{ attack.attacker }}
+                    <template v-if="attack.damage > 0"> attacked for {{ attack.damage }} </template>
+                    <template v-else> healed for {{ attack.damage * -1  }} </template>
+                </li>
+            </ul>
+        </div>
+    </section>
+    </template>
+</div>
+</body>
+ <script src="main.js"></script>
+</html>
