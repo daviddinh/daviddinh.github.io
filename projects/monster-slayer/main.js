@@ -48,7 +48,6 @@ var app = new Vue({
       this.inGame = false
     },
     checkWinner: function(){
-      console.log('checkin winner')
       if(this.myHealth < 0) {
         if(confirm('You lose buddy. Play again?')){
           this.startGame()
